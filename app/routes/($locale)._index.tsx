@@ -6,6 +6,7 @@ import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
+import {Hero} from '~/components/Hero';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Soap Store'}];
@@ -23,7 +24,7 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="home">
+    <div className="w-full">
       {/* <FeaturedCollection collection={data.featuredCollection} /> */}
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
@@ -58,35 +59,38 @@ function RecommendedProducts({
   products: Promise<RecommendedProductsQuery>;
 }) {
   return (
-    <div>
-      <h2>Recommended Products</h2>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          {({products}) => (
-            <div className="grid grid-cols-3">
-              {products.nodes.map((product) => (
-                <Link
-                  key={product.id}
-                  className="recommended-product"
-                  to={`/products/${product.handle}`}
-                >
-                  <Image
-                    data={product.images.nodes[0]}
-                    aspectRatio="1/1"
-                    sizes="(min-width: 45em) 20vw, 50vw"
-                  />
-                  <h4>{product.title}</h4>
-                  <small>
-                    <Money data={product.priceRange.minVariantPrice} />
-                  </small>
-                </Link>
-              ))}
-            </div>
-          )}
-        </Await>
-      </Suspense>
-      <br />
-    </div>
+    <>
+      <Hero />
+      <div className="p-12">
+        {/* <h2>Recommended Products</h2> */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Await resolve={products}>
+            {({products}) => (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {products.nodes.map((product) => (
+                  <Link
+                    key={product.id}
+                    className="border p-4 rounded-lg"
+                    to={`/products/${product.handle}`}
+                  >
+                    <Image
+                      data={product.images.nodes[0]}
+                      aspectRatio="1/1"
+                      sizes="(min-width: 45em) 20vw, 50vw"
+                    />
+                    <h4>{product.title}</h4>
+                    <small>
+                      <Money data={product.priceRange.minVariantPrice} />
+                    </small>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </Await>
+        </Suspense>
+        <br />
+      </div>
+    </>
   );
 }
 

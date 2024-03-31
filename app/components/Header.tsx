@@ -11,7 +11,7 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="h-fit px-36 flex items-center justify-between">
+    <header className="h-fit px-4 md:px-36 flex items-center justify-between">
       <NavLink
         prefetch="intent"
         to="/"

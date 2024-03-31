@@ -73,4 +73,14 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .full-screen-bg {
+    background-image: url('https://ik.imagekit.io/mxdeley/soap-hero.png?updatedAt=1709596420517');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 95vh;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 }
