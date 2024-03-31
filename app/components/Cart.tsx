@@ -244,7 +244,7 @@ export function CartEmpty({
   return (
     <div hidden={hidden}>
       <br />
-      <p>
+      <p className="text-bold">
         Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
         started!
       </p>

@@ -11,15 +11,22 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
+    <header className="h-fit px-36 flex items-center justify-between">
+      <NavLink
+        prefetch="intent"
+        to="/"
+        style={activeLinkStyle}
+        end
+        className="flex items-center gap-2"
+      >
+        <img src={'/soap.svg'} alt={shop.name} className="w-12 h-12" />
+        <h1 className="">{shop.name}</h1>
       </NavLink>
-      <HeaderMenu
+      {/* <HeaderMenu
         menu={menu}
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
-      />
+      /> */}
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );
@@ -91,31 +98,31 @@ function HeaderCtas({
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
     <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+      {/* <HeaderMenuMobileToggle /> */}
+      {/* <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
           </Await>
         </Suspense>
-      </NavLink>
-      <SearchToggle />
+      </NavLink> */}
+      {/* <SearchToggle /> */}
       <CartToggle cart={cart} />
     </nav>
   );
 }
 
-function HeaderMenuMobileToggle() {
-  return (
-    <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
-      <h3>☰</h3>
-    </a>
-  );
-}
+// function HeaderMenuMobileToggle() {
+//   return (
+//     <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
+//       <h3>☰</h3>
+//     </a>
+//   );
+// }
 
-function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
-}
+// function SearchToggle() {
+//   return <a href="#search-aside">Search</a>;
+// }
 
 function CartBadge({count}: {count: number}) {
   return <a href="#cart-aside">Cart {count}</a>;
