@@ -84,3 +84,4 @@ Alternately, the values of the required environment variables "PUBLIC_CUSTOMER_A
 
 > [!NOTE]
 > B2B features such as contextual pricing is not available in SF API with Customer Account API login. If you require this feature, we suggest using the [legacy-customer-account-flow](https://github.com/Shopify/hydrogen/tree/main/examples/legacy-customer-account-flow). This feature should be available in the Customer Account API in the 2024-04 release.
+# soap-shop-hydrogen
