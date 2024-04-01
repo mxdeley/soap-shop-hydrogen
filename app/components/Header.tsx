@@ -44,12 +44,8 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
         <img src={'/soap.svg'} alt={shop.name} className="w-12 h-12" />
         <h1 className="">{shop.name}</h1>
       </NavLink>
-      {/* <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-      /> */}
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+
+      <HeaderCtas cart={cart} />
     </header>
   );
 }
@@ -114,22 +110,9 @@ export function HeaderMenu({
   );
 }
 
-function HeaderCtas({
-  isLoggedIn,
-  cart,
-}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+function HeaderCtas({cart}: Pick<HeaderProps, 'cart'>) {
   return (
     <nav>
-      {/* <HeaderMenuMobileToggle /> */}
-      {/* <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-          </Await>
-        </Suspense>
-      </NavLink> */}
-      {/* <SearchToggle /> */}
-
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline">
@@ -140,47 +123,12 @@ function HeaderCtas({
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Shopping Cart</SheetTitle>
-            {/* <SheetDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
-            </SheetDescription> */}
           </SheetHeader>
           <CartAside cart={cart} />
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              {/* <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              {/* <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" /> */}
-            </div>
-          </div>
-          <SheetFooter>
-            {/* <SheetClose asChild>
-              <Button type="submit">Save changes</Button>
-            </SheetClose> */}
-          </SheetFooter>
         </SheetContent>
       </Sheet>
     </nav>
   );
-}
-
-function HeaderMenuMobileToggle() {
-  return (
-    <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
-      <h3>☰</h3>
-    </a>
-  );
-}
-
-function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
 }
 
 function CartBadge({count}: {count: number}) {
