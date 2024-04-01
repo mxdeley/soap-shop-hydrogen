@@ -2,12 +2,7 @@ import styles from '../styles/tailwind.css';
 
 export const Hero = () => {
   return (
-    <div className="h-screen w-screen full-screen-bg">
-      {/* <img
-        src="/soap-hero.png"
-        alt="soap-hero"
-        className="w-full h-full object-cover absolute -z-10"
-      /> */}
+    <div className="full-screen-bg h-screen w-screen">
       <div className="flex justify-left items-center h-screen">
         <div className="ml-16 w-[35rem] flex flex-col space-y-10">
           <h1 className="text-white font-bold text-8xl">

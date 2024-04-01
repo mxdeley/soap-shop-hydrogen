@@ -45,72 +45,72 @@ export function Layout({
   );
 }
 
-// function CartAside({cart}: {cart: LayoutProps['cart']}) {
-//   return (
-//     <Aside id="cart-aside" heading="CART">
-//       <Suspense fallback={<p>Loading cart ...</p>}>
-//         <Await resolve={cart}>
-//           {(cart) => {
-//             return <CartMain cart={cart} layout="aside" />;
-//           }}
-//         </Await>
-//       </Suspense>
-//     </Aside>
-//   );
-// }
+function CartAside({cart}: {cart: LayoutProps['cart']}) {
+  return (
+    <Aside id="cart-aside" heading="CART">
+      <Suspense fallback={<p>Loading cart ...</p>}>
+        <Await resolve={cart}>
+          {(cart) => {
+            return <CartMain cart={cart} layout="aside" />;
+          }}
+        </Await>
+      </Suspense>
+    </Aside>
+  );
+}
 
-// function SearchAside() {
-//   return (
-//     <Aside id="search-aside" heading="SEARCH">
-//       <div className="predictive-search">
-//         <br />
-//         <PredictiveSearchForm>
-//           {({fetchResults, inputRef}) => (
-//             <div>
-//               <input
-//                 name="q"
-//                 onChange={fetchResults}
-//                 onFocus={fetchResults}
-//                 placeholder="Search"
-//                 ref={inputRef}
-//                 type="search"
-//               />
-//               &nbsp;
-//               <button
-//                 onClick={() => {
-//                   window.location.href = inputRef?.current?.value
-//                     ? `/search?q=${inputRef.current.value}`
-//                     : `/search`;
-//                 }}
-//               >
-//                 Search
-//               </button>
-//             </div>
-//           )}
-//         </PredictiveSearchForm>
-//         <PredictiveSearchResults />
-//       </div>
-//     </Aside>
-//   );
-// }
+function SearchAside() {
+  return (
+    <Aside id="search-aside" heading="SEARCH">
+      <div className="predictive-search">
+        <br />
+        <PredictiveSearchForm>
+          {({fetchResults, inputRef}) => (
+            <div>
+              <input
+                name="q"
+                onChange={fetchResults}
+                onFocus={fetchResults}
+                placeholder="Search"
+                ref={inputRef}
+                type="search"
+              />
+              &nbsp;
+              <button
+                onClick={() => {
+                  window.location.href = inputRef?.current?.value
+                    ? `/search?q=${inputRef.current.value}`
+                    : `/search`;
+                }}
+              >
+                Search
+              </button>
+            </div>
+          )}
+        </PredictiveSearchForm>
+        <PredictiveSearchResults />
+      </div>
+    </Aside>
+  );
+}
 
-// function MobileMenuAside({
-//   menu,
-//   shop,
-// }: {
-//   menu: HeaderQuery['menu'];
-//   shop: HeaderQuery['shop'];
-// }) {
-//   return (
-//     menu &&
-//     shop?.primaryDomain?.url && (
-//       <Aside id="mobile-menu-aside" heading="MENU">
-//         <HeaderMenu
-//           menu={menu}
-//           viewport="mobile"
-//           primaryDomainUrl={shop.primaryDomain.url}
-//         />
-//       </Aside>
-//     )
-//   );
-// }
+function MobileMenuAside({
+  menu,
+  shop,
+}: {
+  menu: HeaderQuery['menu'];
+  shop: HeaderQuery['shop'];
+}) {
+  return (
+    menu &&
+    shop?.primaryDomain?.url && (
+      <Aside id="mobile-menu-aside" heading="MENU">
+        <HeaderMenu
+          menu={menu}
+          viewport="mobile"
+          primaryDomainUrl={shop.primaryDomain.url}
+        />
+      </Aside>
+    )
+  );
+}
