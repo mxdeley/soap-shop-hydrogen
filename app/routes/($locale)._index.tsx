@@ -62,7 +62,7 @@ function RecommendedProducts({
     <>
       <Hero />
       <div className="p-12">
-        {/* <h2>Recommended Products</h2> */}
+        <h2 className="text-3xl py-4 font-bold">Featured Products</h2>
         <Suspense fallback={<div>Loading...</div>}>
           <Await resolve={products}>
             {({products}) => (
