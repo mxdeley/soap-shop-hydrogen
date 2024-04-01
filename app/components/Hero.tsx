@@ -1,6 +1,8 @@
+import styles from '../styles/tailwind.css';
+
 export const Hero = () => {
   return (
-    <div className=" full-screen-bg h-screen w-screen">
+    <div className="h-screen w-screen full-screen-bg">
       {/* <img
         src="/soap-hero.png"
         alt="soap-hero"
