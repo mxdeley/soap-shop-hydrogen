@@ -1,8 +1,13 @@
-import styles from '../styles/tailwind.css';
-
 export const Hero = () => {
   return (
-    <div className="full-screen-bg h-screen w-screen">
+    <div
+      className="h-screen w-screen"
+      style={{
+        backgroundImage: `url('/soap-hero.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <div className="flex justify-left items-center h-screen">
         <div className="ml-16 w-[35rem] flex flex-col space-y-10">
           <h1 className="text-white font-bold text-8xl">
