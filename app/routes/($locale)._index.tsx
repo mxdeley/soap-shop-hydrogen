@@ -66,7 +66,7 @@ function RecommendedProducts({
         <Suspense fallback={<div>Loading...</div>}>
           <Await resolve={products}>
             {({products}) => (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {products.nodes.map((product) => (
                   <Link
                     key={product.id}

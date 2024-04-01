@@ -13,6 +13,8 @@ module.exports = {
   serverMainFields: ['browser', 'module', 'main'],
   serverConditions: ['worker', process.env.NODE_ENV],
   serverDependenciesToBundle: 'all',
+  tailwind: true,
+  postcss: true,
   serverModuleFormat: 'esm',
   serverPlatform: 'neutral',
   serverMinify: process.env.NODE_ENV === 'production',

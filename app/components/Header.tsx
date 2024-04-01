@@ -3,6 +3,17 @@ import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/root';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '~/components/ui/sheet';
+import {Button} from '~/components/ui/button';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -11,7 +22,7 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="h-fit px-4 md:px-36 flex items-center justify-between">
+    <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-white">
       <NavLink
         prefetch="intent"
         to="/"
@@ -97,7 +108,7 @@ function HeaderCtas({
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
-    <nav className="header-ctas" role="navigation">
+    <nav>
       {/* <HeaderMenuMobileToggle /> */}
       {/* <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
@@ -107,6 +118,41 @@ function HeaderCtas({
         </Suspense>
       </NavLink> */}
       {/* <SearchToggle /> */}
+
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline">Open</Button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Edit profile</SheetTitle>
+            <SheetDescription>
+              Make changes to your profile here. Click save when you&apos;re
+              done.
+            </SheetDescription>
+          </SheetHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              {/* <Label htmlFor="name" className="text-right">
+                Name
+              </Label>
+              <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              {/* <Label htmlFor="username" className="text-right">
+                Username
+              </Label>
+              <Input id="username" value="@peduarte" className="col-span-3" /> */}
+            </div>
+          </div>
+          <SheetFooter>
+            <SheetClose asChild>
+              <Button type="submit">Save changes</Button>
+            </SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+
       <CartToggle cart={cart} />
     </nav>
   );

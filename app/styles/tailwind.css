@@ -75,7 +75,7 @@
   }
 
   .full-screen-bg {
-    background-image: url('https://ik.imagekit.io/mxdeley/soap-hero.png?updatedAt=1709596420517');
+    background-image: url('/soap-hero.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
