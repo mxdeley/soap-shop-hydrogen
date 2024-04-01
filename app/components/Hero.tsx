@@ -3,20 +3,21 @@ export const Hero = () => {
     <div
       className="h-screen w-screen"
       style={{
-        backgroundImage: `url('/soap-hero.png')`,
+        backgroundImage: `url('/hero.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        zIndex: '-1',
       }}
     >
-      <div className="flex justify-left items-center h-screen">
-        <div className="ml-16 w-[35rem] flex flex-col space-y-10">
-          <h1 className="text-white font-bold text-8xl">
+      <div className="flex h-screen justify-center items-end">
+        <div className="ml-16 w-full flex flex-col space-y-10 mb-12">
+          <h1 className="text-green-50 font-bold text-8xl">
             Redefining your soap.
           </h1>
           <p className="font-semibold text-white">
             Introducing a soap that will take you away from shower gel...
           </p>
-          <div className="flex space-x-4">
+          {/* <div className="flex space-x-4">
             <a href="/get-started">
               <button className="bg-sky-950 py-3 px-8 border border-white rounded-lg text-white flex space-x-3">
                 <h1>Shop Now</h1>
@@ -61,7 +62,7 @@ export const Hero = () => {
                 </svg>
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
