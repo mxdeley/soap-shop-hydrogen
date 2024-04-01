@@ -1,4 +1,5 @@
 import {NavLink} from '@remix-run/react';
+import {FileWarningIcon} from 'lucide-react';
 import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
 import {useRootLoaderData} from '~/root';
 
@@ -7,10 +8,22 @@ export function Footer({
   shop,
 }: FooterQuery & {shop: HeaderQuery['shop']}) {
   return (
-    <footer className="footer">
-      {menu && shop?.primaryDomain?.url && (
+    <footer className="h-fit px-4 md:px-36 items-center justify-between w-full bg-[#627050] text-white flex border-t border-white z-50">
+      {/* {menu && shop?.primaryDomain?.url && (
         <FooterMenu menu={menu} primaryDomainUrl={shop.primaryDomain.url} />
-      )}
+      )} */}
+      <div className="flex items-center gap-x-2">
+        <img
+          src={'/soap.svg'}
+          alt={shop.name}
+          className="w-8 h-8 text-white "
+        />
+        <h1 className="text-white">{shop.name}</h1>
+      </div>
+      <div className="flex items-center gap-x-2">
+        <FileWarningIcon />
+        <h2 className="text-sm">Website in progress.</h2>
+      </div>
     </footer>
   );
 }
