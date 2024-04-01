@@ -34,7 +34,7 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
     <>
-      <header className="h-fit px-4 md:px-36 items-center justify-between fixed top-0 w-full bg-[#2B3117] text-white hidden md:flex border-b border-white">
+      <header className="h-fit px-4 md:px-36 items-center justify-between fixed top-0 w-full bg-[#2B3117] text-white hidden md:flex border-b border-white z-50">
         <NavLink
           prefetch="intent"
           to="/"
