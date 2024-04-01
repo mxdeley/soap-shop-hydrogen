@@ -1,12 +1,23 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
+import {
+  Await,
+  useLoaderData,
+  Link,
+  type MetaFunction,
+  FetcherWithComponents,
+} from '@remix-run/react';
 import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {CartForm, Image, Money, VariantSelector} from '@shopify/hydrogen';
 import type {
   FeaturedCollectionFragment,
+  ProductFragment,
+  ProductVariantFragment,
+  ProductVariantsQuery,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import {Hero} from '~/components/Hero';
+import {CartLineInput} from '@shopify/hydrogen/storefront-api-types';
+import {ShoppingBagIcon} from 'lucide-react';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Soap Store'}];
@@ -68,24 +79,34 @@ function RecommendedProducts({
             {({products}) => (
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8 ">
                 {products.nodes.map((product) => (
-                  <Link
-                    key={product.id}
-                    className=" bg-white"
-                    to={`/products/${product.handle}`}
-                  >
-                    <Image
-                      data={product.images.nodes[0]}
-                      aspectRatio="1/1"
-                      sizes="(min-width: 45em) 20vw, 50vw"
-                      className="rounded-lg hover:-translate-y-2"
-                    />
-                    <h4 className="text-black text-center pt-2">
-                      {product.title}
-                    </h4>
-                    <h4 className="text-black text-center text-sm">
-                      <Money data={product.priceRange.minVariantPrice} />
-                    </h4>
-                  </Link>
+                  <div key={product.id} className="relative bg-white">
+                    <Link to={`/products/${product.handle}`} className="block">
+                      <Image
+                        data={product.images.nodes[0]}
+                        aspectRatio="1/1"
+                        sizes="(min-width: 45em) 20vw, 50vw"
+                        className="rounded-lg"
+                      />
+                    </Link>
+                    {/* <div className="absolute bottom-12 right-0 p-2">
+                      <ProductMain
+                        selectedVariant={selectedVariant}
+                        product={prod}
+                        variants={variants}
+                      />
+                    </div> */}
+                    <div className="flex items-center justify-center gap-x-4">
+                      <div>
+                        {' '}
+                        <h4 className="text-black text-center pt-2">
+                          {product.title}
+                        </h4>
+                        <h4 className="text-black text-center text-sm">
+                          <Money data={product.priceRange.minVariantPrice} />
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}

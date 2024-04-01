@@ -26,6 +26,7 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
+import {ShoppingBagIcon} from 'lucide-react';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -117,7 +118,12 @@ export default function Product() {
   const {product, variants} = useLoaderData<typeof loader>();
   const {selectedVariant} = product;
   return (
-    <div className="h-screen flex items-center justify-center gap-12 max-w-6xl mx-auto">
+    <div className="h-screen p-4 flex flex-col md:p-0 md:flex-row items-start md:items-center justify-center gap-12 max-w-6xl mx-auto">
+      <ProductTitle
+        selectedVariant={selectedVariant}
+        product={product}
+        variants={variants}
+      />
       <ProductImage image={selectedVariant?.image} />
       <ProductMain
         selectedVariant={selectedVariant}
@@ -146,6 +152,24 @@ function ProductImage({image}: {image: ProductVariantFragment['image']}) {
   );
 }
 
+function ProductTitle({
+  selectedVariant,
+  product,
+  variants,
+}: {
+  product: ProductFragment;
+  selectedVariant: ProductFragment['selectedVariant'];
+  variants: Promise<ProductVariantsQuery>;
+}) {
+  const {title, descriptionHtml} = product;
+  return (
+    <div className="text-left items-start flex flex-col gap-y-2">
+      <h1 className="text-xl font-bold">{title}</h1>
+      <ProductPrice selectedVariant={selectedVariant} />
+    </div>
+  );
+}
+
 function ProductMain({
   selectedVariant,
   product,
@@ -157,10 +181,16 @@ function ProductMain({
 }) {
   const {title, descriptionHtml} = product;
   return (
-    <div className="product-main">
-      <h1>{title}</h1>
+    <div className="text-left items-start">
+      {/* <h1>{title}</h1>
       <ProductPrice selectedVariant={selectedVariant} />
+      <br /> */}
+      <p>
+        <strong>Description</strong>
+      </p>
       <br />
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+
       <Suspense
         fallback={
           <ProductForm
@@ -183,13 +213,6 @@ function ProductMain({
           )}
         </Await>
       </Suspense>
-      <br />
-      <br />
-      <p>
-        <strong>Description</strong>
-      </p>
-      <br />
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       <br />
     </div>
   );
@@ -316,8 +339,10 @@ function AddToCartButton({
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
+            className="flex items-center gap-2 bg-green-300 p-2 rounded-md border-b-2 border-green-500"
           >
             {children}
+            <ShoppingBagIcon />
           </button>
         </>
       )}

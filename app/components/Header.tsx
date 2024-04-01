@@ -15,7 +15,14 @@ import {
   SheetTrigger,
 } from '~/components/ui/sheet';
 import {Button} from '~/components/ui/button';
-import {ShoppingCartIcon} from 'lucide-react';
+import {
+  CircleMinusIcon,
+  CirclePlusIcon,
+  MinusIcon,
+  PlusIcon,
+  ShoppingCartIcon,
+  TrashIcon,
+} from 'lucide-react';
 import {useVariantUrl} from '~/lib/variants';
 import {CartLineUpdateInput} from '@shopify/hydrogen/storefront-api-types';
 
@@ -52,7 +59,7 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
 
         <HeaderCtas cart={cart} />
       </header>
-      <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-[#627050] text-white md:hidden border-b border-white">
+      <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-[#627050] text-white md:hidden border-b border-white z-50">
         <NavLink
           prefetch="intent"
           to="/"
@@ -227,7 +234,7 @@ function CartLines({
 
   return (
     <div aria-labelledby="cart-lines">
-      <ul>
+      <ul className="flex flex-col gap-2">
         {lines.nodes.map((line) => (
           <CartLineItem key={line.id} line={line} layout={layout} />
         ))}
@@ -248,19 +255,8 @@ function CartLineItem({
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
 
   return (
-    <li key={id} className="flex">
+    <li key={id} className="flex gap-x-2">
       {image && (
-        <Image
-          alt={title}
-          aspectRatio="1/1"
-          data={image}
-          height={100}
-          loading="lazy"
-          width={100}
-        />
-      )}
-
-      <div>
         <Link
           prefetch="intent"
           to={lineItemUrl}
@@ -271,20 +267,20 @@ function CartLineItem({
             }
           }}
         >
-          <p>
-            <strong>{product.title}</strong>
-          </p>
+          <Image
+            alt={title}
+            aspectRatio="1/1"
+            data={image}
+            height={200}
+            loading="lazy"
+            width={200}
+          />
         </Link>
+      )}
+      <div className="h-full w-full">
+        <h1>{product.title}</h1>
+
         <CartLinePrice line={line} as="span" />
-        <ul>
-          {selectedOptions.map((option) => (
-            <li key={option.name}>
-              <small>
-                {option.name}: {option.value}
-              </small>
-            </li>
-          ))}
-        </ul>
         <CartLineQuantity line={line} />
       </div>
     </li>
@@ -298,30 +294,41 @@ function CartLineQuantity({line}: {line: CartLine}) {
   const nextQuantity = Number((quantity + 1).toFixed(0));
 
   return (
-    <div className="flex">
-      <small>Quantity: {quantity} &nbsp;&nbsp;</small>
-      <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
-        <button
-          aria-label="Decrease quantity"
-          disabled={quantity <= 1}
-          name="decrease-quantity"
-          value={prevQuantity}
-        >
-          <span>&#8722; </span>
-        </button>
-      </CartLineUpdateButton>
-      &nbsp;
-      <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>
-        <button
-          aria-label="Increase quantity"
-          name="increase-quantity"
-          value={nextQuantity}
-        >
-          <span>&#43;</span>
-        </button>
-      </CartLineUpdateButton>
-      &nbsp;
-      <CartLineRemoveButton lineIds={[lineId]} />
+    <div className="flex flex-col">
+      <div className="flex-col items-center w-full">
+        <h3 className="text-sm">Quantity: {quantity}</h3>
+        <div className="flex gap-x-6">
+          <div className="flex gap-x-2">
+            <CartLineUpdateButton
+              lines={[{id: lineId, quantity: prevQuantity}]}
+            >
+              <button
+                aria-label="Decrease quantity"
+                disabled={quantity <= 1}
+                name="decrease-quantity"
+                value={prevQuantity}
+                className="items-center"
+              >
+                <CircleMinusIcon className="w-4 h-4" />
+              </button>
+            </CartLineUpdateButton>
+            &nbsp;
+            <CartLineUpdateButton
+              lines={[{id: lineId, quantity: nextQuantity}]}
+            >
+              <button
+                aria-label="Increase quantity"
+                name="increase-quantity"
+                value={nextQuantity}
+              >
+                <CirclePlusIcon className="w-4 h-4" />
+              </button>
+            </CartLineUpdateButton>
+          </div>
+
+          <CartLineRemoveButton lineIds={[lineId]} />
+        </div>
+      </div>
     </div>
   );
 }
@@ -351,7 +358,9 @@ function CartLineRemoveButton({lineIds}: {lineIds: string[]}) {
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button type="submit">Remove</button>
+      <button type="submit">
+        <TrashIcon className="w-4 h-4" />
+      </button>
     </CartForm>
   );
 }
@@ -377,7 +386,7 @@ function CartLinePrice({
   }
 
   return (
-    <div>
+    <div className="text-sm">
       <Money withoutTrailingZeros {...passthroughProps} data={moneyV2} />
     </div>
   );
@@ -387,11 +396,11 @@ function CartDetails({layout, cart}: CartMainProps) {
   const cartHasItems = !!cart && cart.totalQuantity > 0;
 
   return (
-    <div className="cart-details">
+    <div className="flex flex-col gap-y-4">
       <CartLines lines={cart?.lines} layout={layout} />
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>
-          <CartDiscounts discountCodes={cart.discountCodes} />
+          {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
           <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
         </CartSummary>
       )}
@@ -403,9 +412,11 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div>
+    <div className="mt-2 text-sm ">
       <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+        <p className="bg-green-300 text-center p-2 rounded-md border-b-2 border-green-500">
+          Continue to Checkout &rarr;
+        </p>
       </a>
       <br />
     </div>
@@ -426,10 +437,10 @@ export function CartSummary({
 
   return (
     <div aria-labelledby="cart-summary" className={className}>
-      <h4>Totals</h4>
+      <h4 className="font-bold">Totals</h4>
       <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
-        <dd>
+        <dt className="text-sm font-semibold">Subtotal</dt>
+        <dd className="text-sm">
           {cost?.subtotalAmount?.amount ? (
             <Money data={cost?.subtotalAmount} />
           ) : (
@@ -516,12 +527,13 @@ export function CartEmpty({
       </p>
       <br />
       <Link
-        to="/collections"
+        to="/"
         onClick={() => {
           if (layout === 'aside') {
-            window.location.href = '/collections';
+            window.location.href = '/';
           }
         }}
+        className="bg-green-300 text-center p-2 rounded-md border-b-2 border-green-500"
       >
         Continue shopping →
       </Link>
@@ -531,7 +543,7 @@ export function CartEmpty({
 
 function CartAside({cart}: {cart: LayoutProps['cart']}) {
   return (
-    <Aside id="cart-aside" heading="CART">
+    <Aside id="cart-aside" heading="">
       <Suspense fallback={<p>Loading cart ...</p>}>
         <Await resolve={cart}>
           {(cart) => {
