@@ -33,7 +33,7 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-white">
+    <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-[#2B3117] text-white">
       <NavLink
         prefetch="intent"
         to="/"
@@ -41,8 +41,8 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
         end
         className="flex items-center gap-2"
       >
-        <img src={'/soap.svg'} alt={shop.name} className="w-12 h-12" />
-        <h1 className="">{shop.name}</h1>
+        <img src={'/soap.svg'} alt={shop.name} className="w-8 h-8 " />
+        <h1 className="text-white">{shop.name}</h1>
       </NavLink>
 
       <HeaderCtas cart={cart} />
@@ -115,10 +115,11 @@ function HeaderCtas({cart}: Pick<HeaderProps, 'cart'>) {
     <nav>
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline">
-            <ShoppingCartIcon />
+          <div className="flex items-center">
+            {' '}
+            <ShoppingCartIcon className="w-6 h-6" />
             <CartToggle cart={cart} />
-          </Button>
+          </div>
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>

@@ -6,63 +6,17 @@ export const Hero = () => {
         backgroundImage: `url('/hero.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        zIndex: '-1',
+        zIndex: 1,
       }}
     >
-      <div className="flex h-screen justify-center items-end">
-        <div className="ml-16 w-full flex flex-col space-y-10 mb-12">
-          <h1 className="text-green-50 font-bold text-8xl">
+      <div className="flex h-screen justify-center items-start lg:items-end">
+        <div className="lg:ml-16 w-full flex flex-col space-y-10 lg:mb-12 mt-12">
+          <h1 className="text-green-50 font-bold lg:text-8xl text-6xl">
             Redefining your soap.
           </h1>
-          <p className="font-semibold text-white">
+          <p className="font-semibold text-white text-sm">
             Introducing a soap that will take you away from shower gel...
           </p>
-          {/* <div className="flex space-x-4">
-            <a href="/get-started">
-              <button className="bg-sky-950 py-3 px-8 border border-white rounded-lg text-white flex space-x-3">
-                <h1>Shop Now</h1>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-arrow-right-circle"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M8 12h8"></path>
-                    <path d="m12 16 4-4-4-4"></path>
-                  </svg>
-                </span>
-              </button>
-            </a>
-            <button className="text-sky-950 py-3 px-8 border border-white rounded-lg bg-white flex space-x-3">
-              <h1>Learn More</h1>
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-arrow-right-circle"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M8 12h8"></path>
-                  <path d="m12 16 4-4-4-4"></path>
-                </svg>
-              </span>
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
