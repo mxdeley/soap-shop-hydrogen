@@ -117,7 +117,7 @@ export default function Product() {
   const {product, variants} = useLoaderData<typeof loader>();
   const {selectedVariant} = product;
   return (
-    <div className="product">
+    <div className="h-screen flex items-center justify-center gap-12 max-w-6xl mx-auto">
       <ProductImage image={selectedVariant?.image} />
       <ProductMain
         selectedVariant={selectedVariant}
@@ -139,7 +139,8 @@ function ProductImage({image}: {image: ProductVariantFragment['image']}) {
         aspectRatio="1/1"
         data={image}
         key={image.id}
-        sizes="(min-width: 45em) 50vw, 100vw"
+        width={500}
+        height={500}
       />
     </div>
   );

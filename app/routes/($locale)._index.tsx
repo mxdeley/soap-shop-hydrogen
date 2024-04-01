@@ -70,16 +70,19 @@ function RecommendedProducts({
                 {products.nodes.map((product) => (
                   <Link
                     key={product.id}
-                    className="border p-4 rounded-lg bg-white"
+                    className=" bg-white"
                     to={`/products/${product.handle}`}
                   >
                     <Image
                       data={product.images.nodes[0]}
                       aspectRatio="1/1"
                       sizes="(min-width: 45em) 20vw, 50vw"
+                      className="rounded-lg hover:-translate-y-2"
                     />
-                    <h4 className="text-black">{product.title}</h4>
-                    <h4 className="text-black">
+                    <h4 className="text-black text-center pt-2">
+                      {product.title}
+                    </h4>
+                    <h4 className="text-black text-center text-sm">
                       <Money data={product.priceRange.minVariantPrice} />
                     </h4>
                   </Link>
@@ -140,7 +143,7 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   }
   query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    products(first: 4, sortKey: UPDATED_AT, reverse: true) {
+    products(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...RecommendedProduct
       }

@@ -40,9 +40,13 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
           to="/"
           style={activeLinkStyle}
           end
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 "
         >
-          <img src={'/soap.svg'} alt={shop.name} className="w-8 h-8 " />
+          <img
+            src={'/soap.svg'}
+            alt={shop.name}
+            className="w-8 h-8 text-white "
+          />
           <h1 className="text-white">{shop.name}</h1>
         </NavLink>
 
