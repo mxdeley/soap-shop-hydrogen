@@ -33,20 +33,36 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, isLoggedIn, cart}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-[#2B3117] text-white">
-      <NavLink
-        prefetch="intent"
-        to="/"
-        style={activeLinkStyle}
-        end
-        className="flex items-center gap-2"
-      >
-        <img src={'/soap.svg'} alt={shop.name} className="w-8 h-8 " />
-        <h1 className="text-white">{shop.name}</h1>
-      </NavLink>
+    <>
+      <header className="h-fit px-4 md:px-36 items-center justify-between fixed top-0 w-full bg-[#2B3117] text-white hidden md:flex border-b border-white">
+        <NavLink
+          prefetch="intent"
+          to="/"
+          style={activeLinkStyle}
+          end
+          className="flex items-center gap-2"
+        >
+          <img src={'/soap.svg'} alt={shop.name} className="w-8 h-8 " />
+          <h1 className="text-white">{shop.name}</h1>
+        </NavLink>
 
-      <HeaderCtas cart={cart} />
-    </header>
+        <HeaderCtas cart={cart} />
+      </header>
+      <header className="h-fit px-4 md:px-36 flex items-center justify-between fixed top-0 w-full bg-[#627050] text-white md:hidden border-b border-white">
+        <NavLink
+          prefetch="intent"
+          to="/"
+          style={activeLinkStyle}
+          end
+          className="flex items-center gap-2"
+        >
+          <img src={'/soap.svg'} alt={shop.name} className="w-8 h-8 " />
+          <h1 className="text-white">{shop.name}</h1>
+        </NavLink>
+
+        <HeaderCtas cart={cart} />
+      </header>
+    </>
   );
 }
 
@@ -116,7 +132,6 @@ function HeaderCtas({cart}: Pick<HeaderProps, 'cart'>) {
       <Sheet>
         <SheetTrigger asChild>
           <div className="flex items-center">
-            {' '}
             <ShoppingCartIcon className="w-6 h-6" />
             <CartToggle cart={cart} />
           </div>
@@ -229,7 +244,7 @@ function CartLineItem({
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
 
   return (
-    <li key={id} className="cart-line">
+    <li key={id} className="flex">
       {image && (
         <Image
           alt={title}
@@ -279,7 +294,7 @@ function CartLineQuantity({line}: {line: CartLine}) {
   const nextQuantity = Number((quantity + 1).toFixed(0));
 
   return (
-    <div className="cart-line-quantity">
+    <div className="flex">
       <small>Quantity: {quantity} &nbsp;&nbsp;</small>
       <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
         <button

@@ -71,6 +71,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#2B3117] text-white;
+    @apply bg-white text-black;
   }
 }
